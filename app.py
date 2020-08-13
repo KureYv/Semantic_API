@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, make_response,jsonify,request
 import tensorflow_hub as hub
 import tensorflow as tf
 import numpy as np
@@ -19,13 +19,19 @@ def semantic(search1,search2):
 def menu():
     return render_template("index.html")
 
-@app.route('/<search1>/<search2>')
+@app.route('/<search1>/<search2>',methods=['POST','GET'])
 def deploy(search1,search2):
     compare = semantic(search1,search2)
     compare = compare*100
     compare = str(compare)
     compare = compare.strip("")
-    return render_template("results.html",compare=compare)
+    response = {
+        "Semantic Similarity": compare
+    }
+    if request.method == 'POST':
+        return make_response(jsonify(response),200)
+    else:
+        return render_template("results.html",compare=compare,)
     
 
 if __name__ == "main":
