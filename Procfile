@@ -1,1 +1,1 @@
-web: gunicorn semanticism:app
+web: gunicorn app:app
