@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, make_response,jsonify,request
 import tensorflow_hub as hub
 import tensorflow as tf
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
+
 
 app = Flask(__name__)
 
@@ -35,4 +35,4 @@ def deploy(search1,search2):
     
 
 if __name__ == "main":
-    app.run(debug=True)
+    app.run(port=int(os.environ.get("PORT", 5000)), host='0.0.0.0')
