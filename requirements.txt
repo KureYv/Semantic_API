@@ -1,6 +1,6 @@
 Flask==1.1.2
 Flask-Bootstrap==3.3.7.1
-gunicorn==20.0.4
+gunicorn==19.10.0
 Jinja2==2.11.2
 numpy==1.18.5
 tensorflow-estimator==2.3.0
