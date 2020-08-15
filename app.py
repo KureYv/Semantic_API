@@ -4,7 +4,7 @@ import numpy as np
 import threading
 
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates')
 
 
 
