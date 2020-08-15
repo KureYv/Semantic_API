@@ -16,6 +16,7 @@ def semantic(search1,search2):
 def task():
     module_url = "https://tfhub.dev/google/universal-sentence-encoder/4" #@param ["https://tfhub.dev/google/universal-sentence-encoder/4", "https://tfhub.dev/google/universal-sentence-encoder-large/5"]
     model = hub.load(module_url)
+    tf.keras.backend.clear_session()
 
 
 @app.route('/')
