@@ -21,7 +21,7 @@ def task():
 
 @app.route('/')
 def menu():
-    threading.Thread(target=task).start()
+
     return render_template("index.html")
 
 @app.route('/<search1>/<search2>',methods=['POST','GET'])
