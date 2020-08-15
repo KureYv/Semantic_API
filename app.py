@@ -1,13 +1,11 @@
 from flask import Flask, render_template, url_for, make_response,jsonify,request
 import tensorflow_hub as hub
-import tensorflow as tf
 import numpy as np
+import threading
 
 
 app = Flask(__name__)
 
-module_url = "https://tfhub.dev/google/universal-sentence-encoder/4" #@param ["https://tfhub.dev/google/universal-sentence-encoder/4", "https://tfhub.dev/google/universal-sentence-encoder-large/5"]
-model = hub.load(module_url)
 
 
 
@@ -15,8 +13,14 @@ def semantic(search1,search2):
     comparison = model([search1,search2])
     return np.inner(comparison[0],comparison[1])
 
+def task():
+    module_url = "https://tfhub.dev/google/universal-sentence-encoder/4" #@param ["https://tfhub.dev/google/universal-sentence-encoder/4", "https://tfhub.dev/google/universal-sentence-encoder-large/5"]
+    model = hub.load(module_url)
+
+
 @app.route('/')
 def menu():
+    threading.Thread(target=task).start()
     return render_template("index.html")
 
 @app.route('/<search1>/<search2>',methods=['POST','GET'])
@@ -34,5 +38,5 @@ def deploy(search1,search2):
         return render_template("results.html",compare=compare,)
     
 
-if __name__ == "main":
+if __name__ == "_)main__":
     app.run(port=int(os.environ.get("PORT", 5000)), host='0.0.0.0')
