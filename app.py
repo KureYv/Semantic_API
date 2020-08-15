@@ -1,7 +1,6 @@
 from flask import Flask, render_template, url_for, make_response,jsonify,request
 import tensorflow_hub as hub
 import numpy as np
-import tensorflow as tf
 import threading
 
 
