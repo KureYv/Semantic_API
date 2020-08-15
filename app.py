@@ -7,7 +7,12 @@ import threading
 app = Flask(__name__,template_folder='templates')
 
 
-
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+  try:
+    tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=500)])
+  except RuntimeError as e:
+    print(e)
 
 def semantic(search1,search2):
     comparison = model([search1,search2])
@@ -21,7 +26,7 @@ def task():
 
 @app.route('/')
 def menu():
-
+    threading.Thread(target=task).start()
     return render_template("index.html")
 
 @app.route('/<search1>/<search2>',methods=['POST','GET'])
