@@ -33,5 +33,5 @@ def deploy(search1,search2):
         return render_template("results.html",compare=compare,)
     
 
-if __name__ == "main":
+if __name__ == "_)main__":
     app.run(port=int(os.environ.get("PORT", 5000)), host='0.0.0.0')
