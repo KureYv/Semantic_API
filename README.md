@@ -1,6 +1,6 @@
 # Semantic_API
 
-API allowing for Semantic similarity
+API allowing for Semantic similarities
 
 Usage:
 Work in progress
